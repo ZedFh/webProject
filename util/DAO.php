@@ -32,7 +32,8 @@ public static function update($chaine,$u){
 
 public static function delete($chaine,$u){    
     $datas=self::$bdd->prepare($chaine);
-    return $datas->execute($u);
+   
+    $datas->execute($u);
 }
 
 public static function disconnect(){

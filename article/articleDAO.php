@@ -121,4 +121,13 @@ class articleDAO{
   
 }
 
+public function count(){
+    DAO::connect('localhost','test','root','password');
+    $data=DAO::select('SELECT count(*) q from article');
+    DAO::disconnect();
+    return $data;
+
+}
+
+
 }

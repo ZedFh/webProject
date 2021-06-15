@@ -95,7 +95,6 @@
 
 <script>
 function myFunction() {
-   
     window.location.replace('/webProject/PageAdmin.php');
 }
 </script>

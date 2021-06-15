@@ -2,11 +2,13 @@
 
 require './user/userDAO.php';
 require './article/articleDAO.php';
-
-
+$ud= new UserDAO();
+$ad= new articleDAO();
 DAO::connect('localhost','test','root','password');
-$nombreUtilisateurs = 5;
-$nombreArticle = 20;
+
+
+$nombreUtilisateurs= $ud->count()[0]['q'];
+$nombreArticle = $ad->count()[0]['q'];
 $nombreCatégorie = 3;
 
 
@@ -33,14 +35,14 @@ $nombreCatégorie = 3;
          <i class="fa fa-users fa-4x"></i>
          <div>
             <h4 class="text-dark m-t-0 m-b-5">Nombre d'utilisateurs : <b><?php echo $nombreUtilisateurs?></b></h4>
-              <a href="#Utilisateur" class="btn btn-success btn-lg px-4 m-2">Visualiser</a>
+              <a href="?op=visualiseUser" class="btn btn-success btn-lg px-4 m-2">Visualiser</a>
          </div>
       </div>
       <div class="col text-center">
          <i class="fa fa-question fa-4x"></i>
          <div>
             <h4 class="text-dark m-t-0 m-b-5">Nombre d'articles : <b><?php echo $nombreArticle?></b></h4>
-            <a href="#Articles" class="btn btn-dark btn-lg px-4 m-2">Visualiser</a>
+            <a href="?op=visualiseArticle" class="btn btn-dark btn-lg px-4 m-2">Visualiser</a>
             <a href="./article/articleForm.php" class="btn btn-success btn-lg px-4 m-2">Ajouter Article</a>
          </div>
       </div>
@@ -54,7 +56,14 @@ $nombreCatégorie = 3;
       </div>
     </div>
   </section>
-
+    <?php 
+      $_GET['visibility']='hidden';
+      if(isset($_GET['op'])){
+        $_GET['visibility']='visible';
+        if($_GET['op']==="visualiseUser"){
+      
+    
+    ?>
    <!-- UTILISATEUR -->
    <section class="p-5 bg-light" id="Utilisateur">
     <h2 class="text-danger">La liste des utilisateurs</h2>
@@ -74,7 +83,7 @@ $nombreCatégorie = 3;
 
         <tbody>
         <?php
-              $ud= new UserDAO();
+              
               $dataUsers= $ud->selectAll();
               foreach( $dataUsers as $d)
               {
@@ -97,7 +106,11 @@ $nombreCatégorie = 3;
     </div>
   </section>
   <!-- FIN UTILISATEUR -->
-
+               <?php }
+               
+               elseif(strcmp($_GET['op'],"visualiseArticle")===0){
+               
+               ?>
   <!-- ARTICLES -->
    <section class="p-5 bg-light" id="Articles">
       <h2 class="text-success">La liste des Articles</h2>
@@ -116,18 +129,18 @@ $nombreCatégorie = 3;
 
           <tbody>
           <?php
-              $ad= new articleDAO();
+              
               $dataArticles = $ad->selectAll();
               foreach( $dataArticles as $d)
               {?>     
                   <tr>
                         <td> <img src="img/articles/<?php echo $d['pathImage'] ?>" height="50" width="50"></td>
-                        <td><?php echo $d['nomA'] ?></td>
+                        <td><?php echo $d['nomA'].' '.$d['idArticle'] ?></td>
                         <td><?php echo $d['libelle'] ?></td>
                         <td><?php echo $d['description'] ?></td>
                         <td><?php echo $d['prix'] ?></td>
                         <td><?php echo $d['quatiteStock'] ?></td>
-                        <td><a href="./article/supprimerArticle.php?idArticle <?=$d['idArticle'] ?>" role= "button" id="supprimer">
+                        <td><a href="./article/supprimerArticle.php?idArticle= <?=$d['idArticle'] ?>"  id="supprimer">
                                 <i class="fas fa-trash-alt text-danger"></i>
                             </a>
                         </td>
@@ -141,7 +154,12 @@ $nombreCatégorie = 3;
         </table>
       </div>
     </section>
-
+                  <?php } 
+                else
+                $_GET['visibility']='hidden';
+                
+                } ?>
+                  <a href="?op=rien" style="visibility:<?=$_GET['visibility']?>;"  class="btn btn-dark btn-lg px-4 m-2">retour</a>
   
 </body>
 </html>
