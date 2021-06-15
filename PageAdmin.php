@@ -1,7 +1,7 @@
 <?php
 
-require_once './user/userDAO.php';
-require_once './article/articleDAO.php';
+require './user/userDAO.php';
+require './article/articleDAO.php';
 
 
 DAO::connect('localhost','test','root','password');

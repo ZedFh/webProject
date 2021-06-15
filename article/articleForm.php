@@ -18,7 +18,7 @@
 <section class="p-5 bg-light text-center" id="AjouterArticle">
       <h2 class="text-danger">Ajouter Article</h2>
       <br>
-    <form class="form-horizontal" role="form" method="POST" action="addArticle">
+    <form class="form-horizontal" role="form" method="POST" action="addArticle" onreset='myFunction()'>
         <div class='row justify-content-center'>
             <div class="col-lg-6">
                 
@@ -91,3 +91,11 @@
 
 </body>
 </html>
+
+
+<script>
+function myFunction() {
+   
+    window.location.replace('/webProject/PageAdmin.php');
+}
+</script>

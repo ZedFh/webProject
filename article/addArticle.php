@@ -1,6 +1,10 @@
 <?php
-    require_once 'articleDAO.php';
+    
+   require 'articleDAO.php';
+    
     $ar= new articleDAO();
+    if(isset($_POST['Annuler']))
+        header('Location: ../Pageadmin.php');
     if(isset($_POST['nomA']) && isset($_POST['pathImage']) && isset($_POST['categorie']) && isset($_POST['description']) && isset($_POST['prix']) && isset($_POST['quatiteStock'])){
         $u['nomA']=$_POST['nomA'];
         $u['pathImage']=$_POST['pathImage'];
