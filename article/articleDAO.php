@@ -14,7 +14,7 @@ class articleDAO{
 
     public function selectAll(){
         DAO::connect('localhost','test','root','password');
-        $datas= DAO::select('SELECT idArticle,nomA,prix,description,pathImage,quatiteStock,libelle FROM article a, categorie c where a.idCategorie=c.idcategorie;');
+        $datas= DAO::select('SELECT idArticle,nomA,prix,description,pathImage,quatiteStock,libelle FROM article a, categorie c where a.idCategorie=c.idcategorie and quatiteStock>0;');
         DAO::disconnect();
         return $datas;
     }
@@ -123,11 +123,19 @@ class articleDAO{
 
 public function count(){
     DAO::connect('localhost','test','root','password');
-    $data=DAO::select('SELECT count(*) q from article');
+    $data=DAO::select('SELECT count(*) q from article ');
     DAO::disconnect();
     return $data;
 
 }
 
+
+public function countForDisplay(){
+    DAO::connect('localhost','test','root','password');
+    $data=DAO::select('SELECT count(*) q from article where quatiteStock>0');
+    DAO::disconnect();
+    return $data;
+
+}
 
 }

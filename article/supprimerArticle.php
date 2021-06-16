@@ -9,5 +9,6 @@ $ud = new articleDAO();
 
 if(isset($_GET['idArticle'])){
     $ud->delete($_GET);
-    header('Location: ../Pageadmin.php');
+  
 }
+header('Location: ../Pageadmin.php?visualiseArticle');

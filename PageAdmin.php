@@ -118,7 +118,7 @@ $nombreCatégorie = $cd->count()[0]['q'];
          <i class="fab fa-buffer fa-4x"></i>
          <div>
             <h4 class="text-dark m-t-0 m-b-5">Nombre de catégories : <b><?php echo $nombreCatégorie ?></b></h4>
-            <a href="#Categories" class="btn btn-dark btn-lg px-4 m-2">Visualiser</a>
+            <a href="?op=visualiseCategorie" class="btn btn-dark btn-lg px-4 m-2">Visualiser</a>
             <a href="./categorie/categorieForm.php" class="btn btn-success btn-lg px-4 m-2">Ajouter Catégorie</a>
          </div>
       </div>
@@ -177,9 +177,10 @@ $nombreCatégorie = $cd->count()[0]['q'];
                <?php }
                
                elseif($_GET['op']==="visualiseArticle"){
-               
+              
                ?>
   <!-- ARTICLES -->
+  
    <section class="p-5 bg-light" id="Articles">
       <h2 class="text-success">La liste des Articles</h2>
       <br>
@@ -222,12 +223,63 @@ $nombreCatégorie = $cd->count()[0]['q'];
         </table>
       </div>
     </section>
-                  <?php } 
-                else
-                $_GET['visibility']='hidden';
+
+    <?php }
+      elseif($_GET['op']==="visualiseCategorie"){
+       
+         ?>  
+
+    <section class="p-5 bg-light" id="Categorie">
+      <h2 class="text-success">La liste des Categories</h2>
+      <br>
+      <div class="fresh-table">
+        <table id="fresh-table" class="table">         
+          <thead>
+            <th data-sortable="true">Libelle</th>
+          </thead>
+
+          <tbody>
+          <?php
+              
+              $dataCategorie = $cd->selectAll();
+              foreach( $dataCategorie as $d)
+              {?>     
+                  <tr>
+                        <td><?php echo $d['libelle'] ?></td>
+                        <td><a href="./categorie/supprimerCategorie.php?idCategorie= <?=$d['idCategorie'] ?>"  id="supprimer">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </a>
+                        </td>
+                                  
+                  </tr>
+                <?php
+                  }
+                  ?>          
+          </tbody>
+             <?php } 
+                else{
+                  $_GET['visibility']='hidden';
+                 
+                }
                 
                 } ?>
                   <a href="?op=rien" style="visibility:<?=$_GET['visibility']?>;"  class="btn btn-dark btn-lg px-4 m-2">retour</a>
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

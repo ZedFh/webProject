@@ -111,3 +111,32 @@ html {
     line-height: 96px !important;
     font-size: 42px;
   }
+
+/* ==================== image aricles ======================= */
+  .img-wrap {
+    text-align: center;
+    display: block;
+  }
+  .img-wrap img {
+    max-width: 100%;
+  }
+
+
+  /* GRID STYLE PRODUCT ITEM */
+.card-product-grid {
+  margin-bottom: 20px;
+}
+
+.card-product-grid .info-wrap {
+  overflow: hidden;
+  padding: 18px 20px;
+}
+.card-product-grid .topbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  left: 0;
+  text-align: initial;
+  padding: 10px 15px;
+}
