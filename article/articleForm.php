@@ -11,7 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/a2a10b07bd.js"></script>
 
-  <link href="style.css" rel="stylesheet">
+ 
 
 </head>
 <body>

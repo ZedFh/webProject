@@ -2,14 +2,15 @@
 
 require './user/userDAO.php';
 require './article/articleDAO.php';
+require './categorie/categorieDAO.php';
 $ud= new UserDAO();
 $ad= new articleDAO();
-DAO::connect('localhost','test','root','password');
+$cd = new categorieDAO();
 
 
 $nombreUtilisateurs= $ud->count()[0]['q'];
 $nombreArticle = $ad->count()[0]['q'];
-$nombreCatégorie = 3;
+$nombreCatégorie = $cd->count()[0]['q'];
 
 
 ?>
@@ -25,10 +26,77 @@ $nombreCatégorie = 3;
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/a2a10b07bd.js"></script>
 
-  <link href="style.css" rel="stylesheet">
+ 
+
+  <link href="monstyle.css" rel="stylesheet">
 
 </head>
 <body>
+<nav class="navbar navbar-dark navbar-expand p-0 bg-danger">
+        <div class="container">
+            <ul class="navbar-nav d-none d-md-flex mr-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Delivery</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
+            </ul>
+            <ul class="navbar-nav">
+            <li  class="nav-item"><a href="#" class="nav-link"> Livraison gratuite pour les commandes de plus de €75 </a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> English </a>
+                <ul class="dropdown-menu dropdown-menu-right" style="max-width: 100px;">
+                <li><a class="dropdown-item" href="#">Arabic</a></li>
+                <li><a class="dropdown-item" href="#">Frensh </a></li>
+                </ul>
+            </li>
+          </ul> <!-- list-inline //  -->
+          </div> <!-- navbar-collapse .// -->
+        </div> <!-- container //  -->
+    </nav> <!-- header-top-light.// -->
+
+    <header class="section-header">
+
+<section class="header-main border-bottom">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-2 col-4">
+        <div class="brand-wrap">
+          <img class="logo" src="../../data/images/stop-shop-logo.jpg">
+        </div> 
+      </div>
+      <div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+
+      </div> <!-- col.// -->
+      <div class="col-lg-4 col-sm-6 col-8 order-2 order-lg-3">
+        <div class="widgets-wrap float-md-right">
+          <div class="widget-header  mr-3">
+            <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+            <span class="badge badge-pill badge-danger notify">0</span>
+          </div>
+          <div class="widget-header icontext">
+            <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
+            <div class="text">
+              <span class="text-muted">Welcome!</span>
+              <div> 
+                <a href="#">Sign in</a> |
+                <a href="#"> Register</a>
+              </div>
+            </div>
+          </div>
+        </div> <!-- widgets-wrap.// -->
+      </div> <!-- col.// -->
+    </div> <!-- row.// -->
+  </div> <!-- container.// -->
+</section> <!-- header-main .// -->
+</header> <!-- section-header.// -->
+
+
+
+
+
+
+
+
+
 <section class="p-5 bg-light">
      <div class="row justify-content-center align-items-center">
       <div class="col text-center">
@@ -51,7 +119,7 @@ $nombreCatégorie = 3;
          <div>
             <h4 class="text-dark m-t-0 m-b-5">Nombre de catégories : <b><?php echo $nombreCatégorie ?></b></h4>
             <a href="#Categories" class="btn btn-dark btn-lg px-4 m-2">Visualiser</a>
-            <a href="#Ajouter Categorie" class="btn btn-success btn-lg px-4 m-2">Ajouter Catégorie</a>
+            <a href="./categorie/categorieForm.php" class="btn btn-success btn-lg px-4 m-2">Ajouter Catégorie</a>
          </div>
       </div>
     </div>
@@ -108,7 +176,7 @@ $nombreCatégorie = 3;
   <!-- FIN UTILISATEUR -->
                <?php }
                
-               elseif(strcmp($_GET['op'],"visualiseArticle")===0){
+               elseif($_GET['op']==="visualiseArticle"){
                
                ?>
   <!-- ARTICLES -->
