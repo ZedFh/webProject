@@ -4,7 +4,7 @@
 class articleDAO{
 
     public function insert($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         
         $datas= DAO::insert("INSERT into article(nomA,prix,description,pathImage,quatiteStock,idCategorie) values(:nomA,:prix,:description,:pathImage,:quatiteStock,:idCategorie );",$u);
         
@@ -13,14 +13,14 @@ class articleDAO{
     }
 
     public function selectAll(){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $datas= DAO::select('SELECT idArticle,nomA,prix,description,pathImage,quatiteStock,libelle FROM article a, categorie c where a.idCategorie=c.idcategorie and quatiteStock>0;');
         DAO::disconnect();
         return $datas;
     }
 
     public function select($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $cpt=0;
         $chaine='SELECT * FROM article WHERE ';
         
@@ -66,14 +66,14 @@ class articleDAO{
     }
 
     public function delete($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $chaine='DELETE FROM article WHERE idArticle=:idArticle';
         DAO::delete($chaine,$u);
         DAO::disconnect();
    }
 
    public function update($set){
-    DAO::connect('localhost','test','root','password');
+    DAO::connect();
     $cpt=0;
     $chaine='UPDATE article set '; 
     
@@ -122,7 +122,7 @@ class articleDAO{
 }
 
 public function count(){
-    DAO::connect('localhost','test','root','password');
+    DAO::connect();
     $data=DAO::select('SELECT count(*) q from article ');
     DAO::disconnect();
     return $data;
@@ -131,7 +131,7 @@ public function count(){
 
 
 public function countForDisplay(){
-    DAO::connect('localhost','test','root','password');
+    DAO::connect();
     $data=DAO::select('SELECT count(*) q from article where quatiteStock>0');
     DAO::disconnect();
     return $data;

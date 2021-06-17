@@ -6,21 +6,21 @@ require_once ('/wamp64/www/devoir/webProject/util/DAO.php');
 class categorieDAO{
 
     public function insert($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $datas= DAO::insert("INSERT into categorie(libelle) values(:libelle);",$u);
         DAO::disconnect();
         return $datas;
     }
 
     public function selectAll(){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $datas= DAO::select('SELECT * FROM categorie;');
         DAO::disconnect();
         return $datas;
     }
 
     public function select($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $cpt=0;
         $chaine='SELECT * FROM categorie WHERE ';
         
@@ -43,14 +43,14 @@ class categorieDAO{
     }
 
     public function delete($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $chaine='DELETE FROM categorie WHERE idCategorie=:idCategorie';
         DAO::delete($chaine,$u);
         DAO::disconnect();
    }
 
    public function update($set){
-    DAO::connect('localhost','test','root','password');
+    DAO::connect();
     $cpt=0;
     $chaine='UPDATE categorie set '; 
     
@@ -74,7 +74,7 @@ class categorieDAO{
 }
 
 public function count(){
-    DAO::connect('localhost','test','root','password');
+    DAO::connect();
     $data=DAO::select('SELECT count(*) q from categorie');
     DAO::disconnect();
     return $data;

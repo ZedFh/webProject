@@ -5,7 +5,7 @@ require '/wamp64/www/devoir/webProject/util/DAO.php';
 class UserDAO{
     
     public function select($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $cpt=0;
         $chaine='SELECT * FROM user WHERE ';
         
@@ -98,14 +98,14 @@ class UserDAO{
     }
 
     public function selectAll(){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $datas= DAO::select('SELECT * FROM user;');
         DAO::disconnect();
         return $datas;
     }
 
     public function insert($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         if(isset($u['numeroCarte'])===null)
             $datas= DAO::insert("INSERT into user(email,nom,prenom,mdp,naissance,Nrue,rue,codePostal,Pays) values(:email,:nom,:prenom,:mdp,:naissance,:Nrue,:rue,:codePostal,:Pays );",$u);
         else
@@ -116,8 +116,8 @@ class UserDAO{
     }
 
     
-    public function update($set){
-        DAO::connect('localhost','test','root','password');
+    public function update($u){
+        DAO::connect();
         $cpt=0;
         $chaine='UPDATE user set '; 
         
@@ -194,14 +194,14 @@ class UserDAO{
     
         
            
-        if(isset($set['email'])){  
+        if(isset($u['email'])){  
             $chaine.=' WHERE ';
             $chaine.='email = :email';
             $cpt++; 
         }
            
         
-        $datas= DAO::update($chaine,$set);
+        $datas= DAO::update($chaine,$u);
         DAO::disconnect();
         return $datas;
       
@@ -209,14 +209,14 @@ class UserDAO{
 
 
     public function delete($u){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $chaine='DELETE FROM user WHERE email=:email';
         DAO::delete($chaine,$u);
         DAO::disconnect();
    }
 
    public function count(){
-        DAO::connect('localhost','test','root','password');
+        DAO::connect();
         $data=DAO::select('SELECT count(*) q from user');
         DAO::disconnect();
         return $data;

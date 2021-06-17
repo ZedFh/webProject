@@ -51,11 +51,47 @@ session_start();
                         }
                        $fin= $count/10+($count%10===0?0:1);
                        
-                        if(isset($_GET['page']))
+                        if(isset($_GET['page'])){
                             $indice=$_GET['page'];
+                            if($indice>$fin-1)
+                                $indice=0;
+                        }
                         else    
                             $indice=0;
                        
+                            //tri !
+                            $i=2;
+                            switch ($i) {
+                                case 0:
+                                    usort( $dataArticles,function($a,$b){
+                                        return $a['prix']-$b['prix'];
+        
+                                    });
+                                    break;
+                                case 1:
+                                    usort( $dataArticles,function($a,$b){
+                                        return -($a['prix']-$b['prix']);
+        
+                                    });
+                                    break;
+                                case 2:
+                                    usort( $dataArticles,function($a,$b){
+                                        return strcmp($a['nomA'],$b['nomA']);
+        
+                                    });
+                                    break;
+
+                                case 3:
+                                    usort( $dataArticles,function($a,$b){
+                                        return -1*strcmp($a['nomA'],$b['nomA']);
+                                    });
+                                    break;
+                            }
+
+
+                           
+
+
                         for($i=0;$i<$fin;$i++){
                         
                         if($i==$indice){
@@ -75,7 +111,7 @@ session_start();
                            
                         ?>   
                 
-                            
+                        <!-- <form action="addPanier.php" method="POST"> -->
                             <div class="col-md-4">
                                 <figure class="card card-product-grid">
                                     <!-- img -->
@@ -92,6 +128,7 @@ session_start();
                                             <div class="price-wrap mt-2">
                                                 <span class="prix"><?php echo $dataArticles[$j]['prix'] ?></span>
                                             </div>
+                                            <span class="prix"><input id="number" type="number" min="1" max=<?=$dataArticles[$j]['quatiteStock']?>></span>
                                         </div>
                                         <a href="" class="btn btn-block btn-primary">Ajouter au panier </a>
                                     </figcaption>
@@ -99,6 +136,7 @@ session_start();
 
                                 </figure>
                             </div>
+                            </form>
                     <?php
                             
                     }

@@ -1,11 +1,16 @@
 <?php
 class DAO{
 private static $bdd;
-public static function connect($localhost,$dbname,$root,$password){
+
+private static  $password='password'; 
+private static  $localhost='localhost';
+private static  $dbname='test';
+private static  $root='root';
+public static function connect(){
     try{
-        self::$bdd = new PDO(   'mysql:host='.$localhost.';dbname='.$dbname.';charset=utf8',
-                                $root,
-                                $password,
+        self::$bdd = new PDO(   'mysql:host='.self::$localhost.';dbname='.self::$dbname.';charset=utf8',
+                                self::$root,
+                                self::$password,
                                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
                             );  
     }catch (PDOException $e) {
@@ -23,6 +28,7 @@ public static function select($chaine,$u=null){
 public static function insert($chaine,$u){
     $datas=self::$bdd->prepare($chaine);
     $datas->execute($u);
+    return self::$bdd->lastInsertId();
 }
 
 public static function update($chaine,$u){
@@ -40,7 +46,10 @@ public static function disconnect(){
     self::$bdd=null;
 }
 
-
+public static function request($chaine){    
+    $datas=self::$bdd->prepare($chaine);
+    return $datas->execute(); 
+}
 
 
 }
