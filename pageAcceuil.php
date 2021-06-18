@@ -1,7 +1,11 @@
 <?php
 
 require './article/articleDAO.php';
+require './categorie/categorieDAO.php';
+
 $ad= new articleDAO();
+$cd = new categorieDAO();
+
 session_start();
 ?>
 <!DOCTYPE html>
@@ -24,11 +28,67 @@ session_start();
     <div class="container">
 
         <div class="row">
+            <!--... FILTRES ...-->
             <aside class="col-md-3">
                 <div class="card">
-                    ... Filtres ...<br>
+                    <!-- filtre Categorie -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">CatÃ©gorie </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_2" style="">
+                            <div class="card-body">
+                                <?php
+                                    $dataCategorie = $cd->selectAll();
+                                    foreach( $dataCategorie as $d)
+                                {?>
+
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label"><?php echo $d['libelle'] ?> 
+                                            <b class="badge badge-pill badge-light float-right">nbr articles</b>  
+                                        </div>
+                                    </label>
+
+                                <?php
+                                }?>
+                            </div> 
+                        </div>
+                    </article> 
+                    <!-- Fin filtre Categorie -->
+
+                    <!-- Filtre Prix -->                  
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Prix </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_3" style="">
+                            <div class="card-body">
+                                <input type="range" class="custom-range" min="0" max="100" name="">
+                                <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <label>Min</label>
+                                <input class="form-control" placeholder="$0" type="number">
+                                </div>
+                                <div class="form-group text-right col-md-6">
+                                <label>Max</label>
+                                <input class="form-control" placeholder="$1,0000" type="number">
+                                </div>
+                                </div> 
+                                <button class="btn btn-block btn-primary">Valider</button>
+                            </div>
+                        </div>
+                    </article> 
+                    <!-- Fin filtre Prix -->                  
                 </div>
             </aside>
+            <!-- FIN FILTRES-->
 
             <main class="col-md-9">
             
@@ -136,7 +196,7 @@ session_start();
 
                                 </figure>
                             </div>
-                            </form>
+                            <!--</form>-->
                     <?php
                             
                     }

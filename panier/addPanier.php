@@ -5,3 +5,4 @@ require './panierDAO.php';
 $pd=new panierDAO();
 
 print_r($pd->insert());
+
