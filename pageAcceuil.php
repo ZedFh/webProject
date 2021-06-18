@@ -39,7 +39,7 @@ session_start();
                                 <h6 class="title">CatÃ©gorie </h6>
                             </a>
                         </header>
-                        <div class="filter-content collapse show" id="collapse_2" style="">
+                        <div class="filter-content collapse show" id="collapse_2" >
                             <div class="card-body">
                                 <?php
                                     $dataCategorie = $cd->selectAll();
@@ -47,7 +47,7 @@ session_start();
                                 {?>
 
                                     <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <input type="checkbox" checked="" class="custom-control-input" name="cat" id="cat">
                                         <div class="custom-control-label"><?php echo $d['libelle'] ?> 
                                             <b class="badge badge-pill badge-light float-right">nbr articles</b>  
                                         </div>
@@ -68,17 +68,17 @@ session_start();
                                 <h6 class="title">Prix </h6>
                             </a>
                         </header>
-                        <div class="filter-content collapse show" id="collapse_3" style="">
+                        <div class="filter-content collapse show" id="collapse_3" >
                             <div class="card-body">
                                 <input type="range" class="custom-range" min="0" max="100" name="">
                                 <div class="form-row">
                                 <div class="form-group col-md-6">
                                 <label>Min</label>
-                                <input class="form-control" placeholder="$0" type="number">
+                                <input class="form-control" placeholder="$0" type="number" name="prixmin" id="prixmin">
                                 </div>
                                 <div class="form-group text-right col-md-6">
                                 <label>Max</label>
-                                <input class="form-control" placeholder="$1,0000" type="number">
+                                <input class="form-control" placeholder="$1,0000" type="number" name="prixmax" id="prixmax">
                                 </div>
                                 </div> 
                                 <button class="btn btn-block btn-primary">Valider</button>
