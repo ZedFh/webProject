@@ -1,5 +1,4 @@
 <?php
-    require_once ('/wamp64/www/devoir/webProject/util/DAO.php');
 
 class articleDAO{
 

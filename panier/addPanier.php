@@ -1,6 +1,7 @@
 <?php
+    require_once '/wamp64/www/devoir/webProject/util/DAO.php';
 
-require './panierDAO.php';
+    require_once './panierDAO.php';
 ////Just un test
 $pd=new panierDAO();
 
