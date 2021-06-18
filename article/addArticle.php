@@ -1,7 +1,6 @@
 <?php
-        require_once '/wamp64/www/devoir/webProject/util/DAO.php';
-
-   require_once 'articleDAO.php';
+    
+   require 'articleDAO.php';
     
     $ar= new articleDAO();
     if(isset($_POST['Annuler']))

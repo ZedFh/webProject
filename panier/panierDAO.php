@@ -1,4 +1,5 @@
 <?php
+require '/wamp64/www/devoir/webProject/util/DAO.php';
 
 
 class panierDAO{

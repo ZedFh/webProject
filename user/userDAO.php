@@ -1,4 +1,5 @@
 <?php
+require '/wamp64/www/devoir/webProject/util/DAO.php';
 
 
 class UserDAO{
@@ -35,52 +36,6 @@ class UserDAO{
             $chaine.='mdp = :mdp';
         }
 
-        if(isset($u['naissance'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='naissance = :naissance';
-        }
-
-        if(isset($u['Nrue'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='Nrue = :Nrue';
-        }
-
-
-        if(isset($u['rue'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='rue = :rue';
-        }
-        if(isset($u['codePostal'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='codePostal = :codePostal';
-        }
-        if(isset($u['Pays'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='Pays = :Pays';
-        }
-
-
-        if(isset($u['numeroCarte'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='numeroCarte = :numeroCarte';
-        }
-        if(isset($u['expCarte'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='expCarte = :expCarte';
-        }
-        if(isset($u['codeCarte'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='codeCarte = :codeCarte';
-        }
-
         if(isset($u['Role'])){
             if($cpt>=1)
                 $chaine.=' and ';
@@ -105,10 +60,8 @@ class UserDAO{
 
     public function insert($u){
         DAO::connect();
-        if(isset($u['numeroCarte'])===null)
-            $datas= DAO::insert("INSERT into user(email,nom,prenom,mdp,naissance,Nrue,rue,codePostal,Pays) values(:email,:nom,:prenom,:mdp,:naissance,:Nrue,:rue,:codePostal,:Pays );",$u);
-        else
-        $datas= DAO::insert("INSERT into user values(:email,:nom,:prenom,:mdp,:naissance,:Nrue,:rue,:codePostal,:Pays,:numeroCarte,:expCarte,:codeCarte,:Role );",$u);
+       
+        $datas= DAO::insert("INSERT into user values(:email,:nom,:prenom,:mdp,:Role );",$u);
 
         DAO::disconnect();
         return $datas;
@@ -137,62 +90,12 @@ class UserDAO{
             $chaine.='mdp = :mdp';
         }
     
-        if(isset($u['naissance'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='naissance = :naissance';
-        }
-    
-        if(isset($u['Nrue'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='Nrue = :Nrue';
-        }
-
-        if(isset($u['rue'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='rue = :rue';
-        }
-
-        if(isset($u['codePostal'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='codePostal = :codePostal';
-        }
-
-        if(isset($u['Pays'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='Pays = :Pays';
-        }
-
-        if(isset($u['numeroCarte'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='numeroCarte = :numeroCarte';
-        }
-
-        if(isset($u['expCarte'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='expCarte = :expCarte';
-        }
-
-        if(isset($u['codeCarte'])){
-            if($cpt>=1)
-                $chaine.=' and ';
-            $chaine.='codeCarte = :codeCarte';
-        }
-
         if(isset($u['Role'])){
             if($cpt>=1)
                 $chaine.=' and ';
             $chaine.='Role = :Role';
         }
     
-        
-           
         if(isset($u['email'])){  
             $chaine.=' WHERE ';
             $chaine.='email = :email';

@@ -47,8 +47,6 @@
                         
                         <select class="form-control" name="categorie"required>
                             <?php 
-                                    require '/wamp64/www/devoir/webProject/util/DAO.php';
-
                                 require_once '../categorie/categorieDAO.php';
                                 $dd = new categorieDAO();
                                 $dataCategories =$dd->selectAll();

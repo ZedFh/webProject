@@ -1,8 +1,8 @@
 <?php
-require_once '/wamp64/www/devoir/webProject/util/DAO.php';
-require_once './user/userDAO.php';
-require_once './article/articleDAO.php';
-require_once './categorie/categorieDAO.php';
+
+require './user/userDAO.php';
+require './article/articleDAO.php';
+require './categorie/categorieDAO.php';
 $ud= new UserDAO();
 $ad= new articleDAO();
 $cd = new categorieDAO();
