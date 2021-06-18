@@ -14,7 +14,14 @@ class categorieDAO{
 
     public function selectAll(){
         DAO::connect();
-        $datas= DAO::select('SELECT * FROM categorie;');
+        $datas= DAO::select('SELECT * FROM categorie; ');
+        DAO::disconnect();
+        return $datas;
+    }
+
+    public function selectAllFor(){
+        DAO::connect();
+        $datas= DAO::select('SELECT article.idCategorie,libelle,count(article.idCategorie) q FROM categorie,article where categorie.idCategorie=article.idCategorie group by article.idCategorie; ');
         DAO::disconnect();
         return $datas;
     }

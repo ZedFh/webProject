@@ -32,24 +32,26 @@ session_start();
             <aside class="col-md-3">
                 <div class="card">
                     <!-- filtre Categorie -->
+                   
                     <article class="filter-group">
+                    <form action="#" method="get">
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
                                 <i class="icon-control fa fa-chevron-down"></i>
-                                <h6 class="title">CatÃ©gorie </h6>
+                                <h6 class="title">Categorie </h6>
                             </a>
                         </header>
                         <div class="filter-content collapse show" id="collapse_2" >
                             <div class="card-body">
                                 <?php
-                                    $dataCategorie = $cd->selectAll();
+                                    $dataCategorie = $cd->selectAllFor();
                                     foreach( $dataCategorie as $d)
                                 {?>
 
                                     <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" checked="" class="custom-control-input" name="cat" id="cat">
+                                        <input type="checkbox"  class="custom-control-input" name="cat[]" value=<?=$d['idCategorie'] ?>>
                                         <div class="custom-control-label"><?php echo $d['libelle'] ?> 
-                                            <b class="badge badge-pill badge-light float-right">nbr articles</b>  
+                                            <b class="badge badge-pill badge-light float-right"><?=$d['q']?></b>  
                                         </div>
                                     </label>
 
@@ -57,6 +59,7 @@ session_start();
                                 }?>
                             </div> 
                         </div>
+                        </from>
                     </article> 
                     <!-- Fin filtre Categorie -->
 
@@ -81,7 +84,7 @@ session_start();
                                 <input class="form-control" placeholder="$1,0000" type="number" name="prixmax" id="prixmax">
                                 </div>
                                 </div> 
-                                <button class="btn btn-block btn-primary">Valider</button>
+                                <button class="btn btn-block btn-primary" name="filtre" value="filre">Valider</button>
                             </div>
                         </div>
                     </article> 
@@ -93,13 +96,24 @@ session_start();
             <main class="col-md-9">
             
             <?php
+
                         if(!isset($_GET['page'])){
-                            $count=$ad->countForDisplay()[0]['q'];
-                            $dataArticles = $ad->selectAll();
-                            $_SESSION["count"]= $count;
-                            $_SESSION["dataArticle"]=$dataArticles;
-                            echo $_SESSION["count"];
-                        
+                            if(!isset($_GET['filtre'])){
+                                $count=$ad->countForDisplay()[0]['q'];
+                                $dataArticles = $ad->selectAll();
+                                $_SESSION["count"]= $count;
+                                $_SESSION["dataArticle"]=$dataArticles;
+                               
+                            }
+                            else{
+                               
+                                $count= $ad->countfiltered($_GET)[0]['q'];
+                                $dataArticles = $ad->selectfiltered($_GET);
+                                echo $count;
+                                $_SESSION["count"]= $count;
+                                $_SESSION["dataArticle"]=$dataArticles;
+                                
+                            }
                         }
                         else{
                             if(isset($_SESSION["count"])){

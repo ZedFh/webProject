@@ -138,4 +138,80 @@ public function countForDisplay(){
 
 }
 
+public function countfiltered($u){
+    DAO::connect();
+    $chaine ="SELECT count(*) q from article where ";
+    $c=0;
+    $list=null;
+    if(isset($u['cat'])){
+        $chaine.=" idCategorie in (";
+        foreach($u['cat'] as $a){
+            $chaine.="  :idCategorie$c";
+            $list['idCategorie'.$c]=$a;
+            $c++;
+            if($c!=count($u['cat']))
+                $chaine.=" , ";
+        }
+        $chaine.=" )";
+    }
+    if(isset($u['prixmin']) && $u['prixmin']!=""){
+        if($c>0)
+            $chaine.=" and ";
+        $c++;
+        $chaine.="prix > :prixmin";
+        $list['prixmin']=$u['prixmin'];
+    }
+
+    if(isset($u['prixmax']) && $u['prixmax']!="" ){
+        if($c>0)
+            $chaine.=" and ";
+        $c++;
+        $chaine.="prix < :prixmax ";
+        $list['prixmax']=$u['prixmax'];
+    }
+
+    $data=DAO::select( $chaine,$list);
+    DAO::disconnect();
+    return $data;
+}
+
+
+public function selectfiltered($u){
+    DAO::connect();
+    $chaine ="SELECT * from article where ";
+    $c=0;
+    $list=null;
+    if(isset($u['cat'])){
+        $chaine.=" idCategorie in (";
+        foreach($u['cat'] as $a){
+            $chaine.="  :idCategorie$c";
+            $list['idCategorie'.$c]=$a;
+            $c++;
+            if($c!=count($u['cat']))
+                $chaine.=" , ";
+        }
+        $chaine.=" )";
+    }
+    if(isset($u['prixmin']) && $u['prixmin']!=""){
+        if($c>0)
+            $chaine.=" and ";
+        $c++;
+        $chaine.="prix > :prixmin";
+        $list['prixmin']=$u['prixmin'];
+    }
+
+    if(isset($u['prixmax']) && $u['prixmax']!="" ){
+        if($c>0)
+            $chaine.=" and ";
+        $c++;
+        $chaine.="prix < :prixmax ";
+        $list['prixmax']=$u['prixmax'];
+    }
+    
+    $data=DAO::select( $chaine,$list);
+    DAO::disconnect();
+    return $data;
+}
+
+
 }
