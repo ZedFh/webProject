@@ -35,12 +35,13 @@ session_start();
         <!-- Sidebar  -->
         <!--... FILTRES ...-->
         <nav id="sidebar">
+            <form  action="#" method="get">
             <div class="sidebar-header">
                 <h3>Filtrer</h3>
             </div>
-
+            <form action="#" method="get">
             <ul class="list-unstyled components">
-            
+                
                 <!-- filtre Categorie -->
                 <li class="active">
                     <a href="#FiltreCategorie" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catégorie</a>
@@ -79,12 +80,13 @@ session_start();
                                         <input class="form-control" placeholder="1,0000€" type="number" name="prixmax" id="prixmax">
                                     </div>
                                 </div> 
-                                <button class="btn btn-block btn-primary">Valider</button>
+                                <button class="btn btn-block btn-primary" name="filtre" value="filre">Valider</button>
                         </div>
                     </ul>
                 </li>
                 <!-- Fin Filtre Prix -->                  
             </ul>
+            </form>
         </nav>
         <!--... Fin FILTRES ...-->
 
@@ -132,11 +134,22 @@ session_start();
                 
                 <?php
                             if(!isset($_GET['page'])){
-                                $count=$ad->countForDisplay()[0]['q'];
-                                $dataArticles = $ad->selectAll();
-                                $_SESSION["count"]= $count;
-                                $_SESSION["dataArticle"]=$dataArticles;
-                                echo $_SESSION["count"];
+                                if(!isset($_GET['filtre'])){
+                                    $count=$ad->countForDisplay()[0]['q'];
+                                    $dataArticles = $ad->selectAll();
+                                    $_SESSION["count"]= $count;
+                                    $_SESSION["dataArticle"]=$dataArticles;
+                                   
+                                }
+                                else{
+                                   
+                                    $count= $ad->countfiltered($_GET)[0]['q'];
+                                    $dataArticles = $ad->selectfiltered($_GET);
+                                    echo $count;
+                                    $_SESSION["count"]= $count;
+                                    $_SESSION["dataArticle"]=$dataArticles;
+                                    
+                                }
                             
                             }
                             else{

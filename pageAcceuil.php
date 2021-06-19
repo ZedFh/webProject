@@ -7,6 +7,9 @@ $ad= new articleDAO();
 $cd = new categorieDAO();
 
 session_start();
+    if(isset($_SESSION['Role'])&& $_SESSION['Role']==1)
+        header('Location: ./pageAdmin');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
