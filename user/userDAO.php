@@ -73,7 +73,7 @@ class UserDAO{
     public function insert($u){
         DAO::connect();
        
-        $datas= DAO::insert("INSERT into user values(:email,:nom,:prenom,:mdp );",$u);
+        $datas= DAO::insert("INSERT into user(email,nom,prenom,mdp) values(:email,:nom,:prenom,:mdp );",$u);
 
         DAO::disconnect();
         return $datas;

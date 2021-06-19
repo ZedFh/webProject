@@ -1,7 +1,7 @@
 <?php
     require_once '/wamp64/www/devoir/webProject/util/DAO.php';
     require_once '/wamp64/www/devoir/webProject/user/userDAO.php';
-
+    session_start();
     if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['mdp']))
 {
     $nom = htmlspecialchars($_POST['nom']);
@@ -25,8 +25,9 @@
                             $_POST['mdp']= md5($_POST['mdp']);
                             print_r($_POST);
                             $ud->insert($_POST);
-                            
-                            header('Location:inscription.php?reg_err=success');
+                            $_SESSION['user']=$email;
+                            $_SESSION['Role']=0; 
+                            header('Location: ../pageAcceuil.php');
                            
                             
                     }else{ header('Location: inscription.php?reg_err=email'); die();}
