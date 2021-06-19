@@ -28,8 +28,9 @@ public static function select($chaine,$u=null){
 public static function insert($chaine,$u){
     $datas=self::$bdd->prepare($chaine);
     $datas->execute($u);
-    return self::$bdd->lastInsertId();
+    return $datas;
 }
+
 
 public static function update($chaine,$u){
     $datas=self::$bdd->prepare($chaine);

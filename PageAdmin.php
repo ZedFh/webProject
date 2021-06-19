@@ -3,6 +3,12 @@
 require './user/userDAO.php';
 require './article/articleDAO.php';
 require './categorie/categorieDAO.php';
+
+session_start();
+//if(!isset($_SESSION['Role']) || (isset($_SESSION['Role']) && $_SESSION['Role']==0 ))
+  //header('Location: ./pageAcceuil.php');
+
+
 $ud= new UserDAO();
 $ad= new articleDAO();
 $cd = new categorieDAO();

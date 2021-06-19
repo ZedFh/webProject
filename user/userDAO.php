@@ -1,5 +1,4 @@
 <?php
-require '/wamp64/www/devoir/webProject/util/DAO.php';
 
 
 class UserDAO{
@@ -51,6 +50,19 @@ class UserDAO{
         return $datas;
     }
 
+
+    public function checkExist($u){
+        DAO::connect();
+        $cpt=0;
+        $chaine='SELECT * FROM user WHERE email = :email ;';
+        
+        $datas= DAO::select($chaine,$u);
+        DAO::disconnect();
+        return $datas;
+    }
+
+
+
     public function selectAll(){
         DAO::connect();
         $datas= DAO::select('SELECT * FROM user;');
@@ -61,7 +73,7 @@ class UserDAO{
     public function insert($u){
         DAO::connect();
        
-        $datas= DAO::insert("INSERT into user values(:email,:nom,:prenom,:mdp,:Role );",$u);
+        $datas= DAO::insert("INSERT into user values(:email,:nom,:prenom,:mdp );",$u);
 
         DAO::disconnect();
         return $datas;
